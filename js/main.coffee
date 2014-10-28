@@ -13,8 +13,7 @@ class LiveTime
 
 
   renderTable: ->
-    unless  @dataYear or @dataBirthday then return
-
+    if  !@dataYear or !@dataBirthday then return
     table = '<table class="table table-bordered">'
     count = @getCountWeek( @dataBirthday )
     for i in [0...@dataYear]
