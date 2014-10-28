@@ -8,14 +8,18 @@
       this.$tableLive = $(optiuns.tableLive);
       this.$dataYear = $(optiuns.year);
       this.dataBirthday = optiuns.dataBirthday || '';
+      this.dataBirthday = optiuns.dataYear || 90;
       this.initDatePiker();
       this.initDateYear();
       this.getStorage();
+      this.renderTable();
     }
 
     LiveTime.prototype.renderTable = function() {
       var count, i, j, table, _i, _j, _ref;
-      console.log('-------------');
+      if (!(this.dataYear || this.dataBirthday)) {
+        return;
+      }
       table = '<table class="table table-bordered">';
       count = this.getCountWeek(this.dataBirthday);
       for (i = _i = 0, _ref = this.dataYear; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
@@ -44,7 +48,14 @@
         endDate: new Date(),
         todayHighlight: true
       });
-      return this.$datePiker.on('changeDate', (function(_this) {
+      this.$datePiker.on('changeDate', (function(_this) {
+        return function() {
+          _this.dataBirthday = _this.$datePiker.datepicker('getDate');
+          _this.setStorage();
+          return _this.renderTable();
+        };
+      })(this));
+      return this.$dataYear.on('change', (function(_this) {
         return function() {
           _this.dataBirthday = _this.$datePiker.datepicker('getDate');
           _this.setStorage();
@@ -70,12 +81,17 @@
       if (dataYear) {
         this.dataYear = dataYear;
         this.$dataYear.val(this.dataYear);
+        this.$datePiker.parents('.form-group').removeClass('has-error');
+      } else {
+        this.$datePiker.parents('.form-group').addClass('has-error');
       }
       if (time) {
         this.dataBirthday = new Date(time);
         this.$datePiker.datepicker('update', this.dataBirthday);
+        return this.$datePiker.parents('.form-group').removeClass('has-error');
+      } else {
+        return this.$datePiker.parents('.form-group').addClass('has-error');
       }
-      return this.renderTable();
     };
 
     LiveTime.prototype.setStorage = function() {

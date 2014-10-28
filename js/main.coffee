@@ -4,13 +4,17 @@ class LiveTime
     @$tableLive = $( optiuns.tableLive )
     @$dataYear = $( optiuns.year )
     @dataBirthday = optiuns.dataBirthday || ''
+    @dataBirthday = optiuns.dataYear || 90
 
     do @initDatePiker
     do @initDateYear
     do @getStorage
+    @renderTable()
+
 
   renderTable: ->
-    console.log '-------------'
+    unless  @dataYear or @dataBirthday then return
+
     table = '<table class="table table-bordered">'
     count = @getCountWeek( @dataBirthday )
     for i in [0...@dataYear]
@@ -40,6 +44,10 @@ class LiveTime
       do  @setStorage
       do  @renderTable
     )
+    @$dataYear.on 'change', =>
+      @dataBirthday = @$datePiker.datepicker( 'getDate' )
+      do  @setStorage
+      do  @renderTable
 
   initDateYear: ->
     @$dataYear.on 'change', =>
@@ -53,11 +61,16 @@ class LiveTime
     if dataYear
       @dataYear = dataYear
       @$dataYear.val( @dataYear )
+      @$datePiker.parents('.form-group').removeClass('has-error')
+    else
+      @$datePiker.parents('.form-group').addClass('has-error')
+
     if time
       @dataBirthday = new Date( time )
       @$datePiker.datepicker( 'update', @dataBirthday )
-
-    @renderTable()
+      @$datePiker.parents('.form-group').removeClass('has-error')
+    else
+      @$datePiker.parents('.form-group').addClass('has-error')
 
   setStorage: ->
     localStorage.setItem( 'timelive', @dataBirthday.getTime() )
