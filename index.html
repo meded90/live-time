@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="container">
+    <h1>Сколько тебе осталось жить</h1>
+    <div id="table"></div>
+    <div class="row">
+        <div class="col-sx-6 col-md-2">
+
+            <div class="form-group">
+                <label for="date" class="control-label">Твой день рождения:</label>
+
+                <input type="text" class="form-control " formt="MM-DD-YYYY" id="date" value="">
+            </div>
+        </div>
+        <div class="col-sx-6 col-md-10">
+            <span class="example"></span> - прожитая неделя
+        </div>
+    </div>
+
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/twix/bin/twix.min.js"></script>
+<script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

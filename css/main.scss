@@ -1,0 +1,43 @@
+
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+.container {
+    min-width: 600px;
+    min-height: 400px;
+}
+#table {
+    table{
+        width: auto;
+    }
+    td{
+        width: 11px;
+        padding: 0;
+        line-height: 10px;
+        font-size: 9px;
+        vertical-align: middle;
+
+        &.year{
+            text-align: center;
+        }
+        &.select{
+            background-color: #ff5451;
+        }
+    }
+}
+.example {
+    display: inline-block;
+    background-color: #ff5451;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+
+}
+
