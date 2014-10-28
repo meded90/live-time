@@ -6,17 +6,19 @@
     function LiveTime(optiuns) {
       this.$datePiker = $(optiuns.datePiker);
       this.$tableLive = $(optiuns.tableLive);
+      this.$dataYear = $(optiuns.year);
       this.dataBirthday = optiuns.dataBirthday || '';
       this.initDatePiker();
+      this.initDateYear();
       this.getStorage();
     }
 
     LiveTime.prototype.renderTable = function() {
-      var count, i, j, table, _i, _j;
+      var count, i, j, table, _i, _j, _ref;
       console.log('-------------');
       table = '<table class="table table-bordered">';
       count = this.getCountWeek(this.dataBirthday);
-      for (i = _i = 0; _i < 60; i = ++_i) {
+      for (i = _i = 0, _ref = this.dataYear; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         table += '<tr>';
         for (j = _j = 0; _j < 53; j = ++_j) {
           if (j === 0) {
@@ -51,18 +53,34 @@
       })(this));
     };
 
+    LiveTime.prototype.initDateYear = function() {
+      return this.$dataYear.on('change', (function(_this) {
+        return function() {
+          _this.dataYear = _this.$dataYear.val();
+          _this.setStorage();
+          return _this.renderTable();
+        };
+      })(this));
+    };
+
     LiveTime.prototype.getStorage = function() {
-      var time;
+      var dataYear, time;
       time = +localStorage.getItem('timelive');
+      dataYear = +localStorage.getItem('timeYear');
+      if (dataYear) {
+        this.dataYear = dataYear;
+        this.$dataYear.val(this.dataYear);
+      }
       if (time) {
         this.dataBirthday = new Date(time);
         this.$datePiker.datepicker('update', this.dataBirthday);
-        return this.renderTable();
       }
+      return this.renderTable();
     };
 
     LiveTime.prototype.setStorage = function() {
-      return localStorage.setItem('timelive', this.dataBirthday.getTime());
+      localStorage.setItem('timelive', this.dataBirthday.getTime());
+      return localStorage.setItem('timeYear', this.dataYear);
     };
 
     LiveTime.prototype.getCountWeek = function(date) {
@@ -77,7 +95,8 @@
 
   new LiveTime({
     datePiker: '#date',
-    tableLive: '#table'
+    tableLive: '#table',
+    year: '#year'
   });
 
 }).call(this);

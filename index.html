@@ -12,31 +12,145 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css">
     <link rel="stylesheet" href="css/main.css">
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-56177553-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 <body>
 <div class="container">
-    <h1>Сколько тебе осталось жить </h1>
+    <h1>Сколько тебе осталось жить до пенссии </h1>
 
     <div id="table"></div>
-    <div class="row">
-        <div class="col-sx-6 col-md-2">
+    <span class="example"></span> - прожитая неделя
+    <br/>
+    <br/>
 
-            <div class="form-group">
+    <div class="row">
+        <div class="col-sx-6 col-md-3">
+
+            <div class="form-group ">
                 <label for="date" class="control-label">Твой день рождения:</label>
 
-                <input type="text" class="form-control " formt="MM-DD-YYYY" id="date" value="">
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control input-sm " formt="MM-DD-YYYY" id="date" value="">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sx-6 col-md-10">
-            <span class="example"></span> - прожитая неделя
+        <div class="col-sx-6 col-md-3">
+
+            <div class="form-group row">
+                <label for="date" class="control-label">Когда собираешся на пенсю:</label>
+
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <input type="number" class="form-control input-sm " id="year" value="60">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br/>
+
+    <div class="soc">
+        <div>
+            <style>
+                .soc {
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .soc .b-share_theme_counter .b-share__handle {
+                    padding: 10px !important;
+                    text-align: center;
+                }
+            </style>
+
+            <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+            <script type="text/javascript">
+                // создаем блок c кнопакми поделмя
+
+
+                //ишим опися
+                var dis = "Интернет магазин интересных вещей";
+                var meta = document.getElementsByTagName('meta');
+                for (var i = 0; i < meta.length; i++) {
+                    var obj = meta[i];
+                    if (obj.name === "description") {
+                        dis = obj.content;
+                    }
+                }
+
+                var YaShareInstance = new Ya.share({
+                    element: 'ya_share1',
+                    onready: function (instance) {
+
+                    },
+                    l10n: "ru",
+                    elementStyle: {
+                        quickServices: ["vkontakte", "facebook", "twitter", "odnoklassniki", "moimir"]
+                    },
+                    theme: "counter",
+
+                    description: obj,
+                    image: '',
+
+
+                    link: "http://meded90.github.io/live-time/",
+                    onshare: function (name, block) {
+                        debugger
+                        ga('send', {
+                            'hitType': 'social',
+                            'socialNetwork': name,
+                            'socialAction': 'like',
+                            'socialTarget': 'http://meded90.github.io/live-time/',
+                            'page': 'http://meded90.github.io/live-time/'
+                        });
+                    }
+                });
+            </script>
+            <h4>
+                Раскажи друзям!!
+            </h4>
+
+            <div>
+                <span id="ya_share1"></span>
+            </div>
+        </div>
+    </div>
     <br/>
+
     <a href="https://chrome.google.com/webstore/detail/akpkdgmkngmbaohcpjlaoibpapjapiob/publish-accepted?utm_source=chrome-ntp-icon"
+       onclick="ga('send', 'event', 'link', 'click', 'to chrome app', 2); return true"
        target="_blank">
         <img src="./img/chrome-ios-icon.png" style="width: 64px;" alt=""/>
-            Приложения для хрома
+        Приложения для хрома
+    </a>
+    <a href="https://vk.com/baldink" onclick="ga('send', 'event', 'link', 'click', 'to vk page', 4); return true"
+       style="display: inline-block; vertical-align: middle; width: 300px;"
+       target="_blank">
+        <img style="float: left; margin-right: 10px; margin-left: 30px;" src="./img/avatar.jpg" alt=""/>
+        Автор приложения <br/>
+        добовлейтесь&nbsp;в&nbsp;друзя <br/>
+        Будет еше много интерсного
+
     </a>
 </div>
 
@@ -45,22 +159,6 @@
 <script src="bower_components/twix/bin/twix.min.js"></script>
 <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="js/main.js"></script>
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-56177553-2', 'auto');
-    ga('send', 'pageview');
-
-</script>
 </body>
 </html>

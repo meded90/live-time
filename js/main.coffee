@@ -1,25 +1,27 @@
 class LiveTime
-  constructor:(optiuns)->
-    @$datePiker = $(optiuns.datePiker)
-    @$tableLive = $(optiuns.tableLive)
+  constructor: ( optiuns )->
+    @$datePiker = $( optiuns.datePiker )
+    @$tableLive = $( optiuns.tableLive )
+    @$dataYear = $( optiuns.year )
     @dataBirthday = optiuns.dataBirthday || ''
 
     do @initDatePiker
+    do @initDateYear
     do @getStorage
 
-  renderTable:->
+  renderTable: ->
     console.log '-------------'
     table = '<table class="table table-bordered">'
-    count = @getCountWeek(@dataBirthday)
-    for i in [0...60]
+    count = @getCountWeek( @dataBirthday )
+    for i in [0...@dataYear]
       table += '<tr>'
       for j in [0...53]
         if j == 0
           table += "<td class='year'>#{i}</td>"
         else
-          if count >=0
+          if count >= 0
             table += '<td class="select"></td>'
-            count = count- 1
+            count = count - 1
           else
             table += '<td></td>'
       table += '<tr>'
@@ -27,32 +29,47 @@ class LiveTime
     @$tableLive.html table
 
 
-  initDatePiker:->
-    @$datePiker.datepicker({
+  initDatePiker: ->
+    @$datePiker.datepicker( {
       startView: 2,
       endDate: new Date()
       todayHighlight: true
-    })
-    @$datePiker.on('changeDate', =>
-        @dataBirthday = @$datePiker.datepicker('getDate')
-        @setStorage()
-        @renderTable()
+    } )
+    @$datePiker.on( 'changeDate', =>
+      @dataBirthday = @$datePiker.datepicker( 'getDate' )
+      do  @setStorage
+      do  @renderTable
     )
-  getStorage:->
-    time  = +localStorage.getItem('timelive')
-    if time
-      @dataBirthday = new Date(time)
-      @$datePiker.datepicker('update', @dataBirthday)
-      @renderTable()
-  setStorage:->
-    localStorage.setItem('timelive',@dataBirthday.getTime())
 
-  getCountWeek:(date)->
-    offset = moment(date).twix(new Date()).count('year') * 0.1774568456
-    moment(date).twix(new Date()).count('week') - offset
+  initDateYear: ->
+    @$dataYear.on 'change', =>
+      @dataYear = @$dataYear.val()
+      do @setStorage
+      do @renderTable
+
+  getStorage: ->
+    time = +localStorage.getItem( 'timelive' )
+    dataYear = +localStorage.getItem( 'timeYear' )
+    if dataYear
+      @dataYear = dataYear
+      @$dataYear.val( @dataYear )
+    if time
+      @dataBirthday = new Date( time )
+      @$datePiker.datepicker( 'update', @dataBirthday )
+
+    @renderTable()
+
+  setStorage: ->
+    localStorage.setItem( 'timelive', @dataBirthday.getTime() )
+    localStorage.setItem( 'timeYear', @dataYear )
+
+  getCountWeek: ( date )->
+    offset = moment( date ).twix( new Date() ).count( 'year' ) * 0.1774568456
+    moment( date ).twix( new Date() ).count( 'week' ) - offset
 
 
 new LiveTime(
   datePiker: '#date'
   tableLive: '#table'
+  year: '#year'
 )
