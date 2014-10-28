@@ -17,7 +17,7 @@
 
     LiveTime.prototype.renderTable = function() {
       var count, i, j, table, _i, _j, _ref;
-      if (!(this.dataYear || this.dataBirthday)) {
+      if (!this.dataYear || !this.dataBirthday) {
         return;
       }
       table = '<table class="table table-bordered">';
