@@ -1,8 +1,8 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
 
     "name": "liveTime",
-    "description": "liveTime - увитеть сколео тебе ослось жинь",
+    "description": "liveTime - увидеть сколько тебе осталось жить",
     "version": "1.0",
     "permissions": [ "tabs", "storage"  ],
     "browser_action": {
