@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="container">
+    <h1>Сколько тебе осталось жить до пенсии</h1>
+
+    <div id="table"></div>
+    <span class="example"></span> - прожитая неделя
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div class="col-sx-6 col-md-3">
+
+            <div class="form-group has-error">
+                <label for="date" class="control-label">Твой день рождения:</label>
+
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control input-sm " formt="MM-DD-YYYY" id="date" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sx-6 col-md-3">
+
+            <div class="form-group row ">
+                <label for="date" class="control-label">Когда собираешся на пенсию:</label>
+
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <input type="number" class="form-control input-sm " id="year" value="60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="soc">
+        <div>
+            <style>
+                .soc {
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .soc .b-share_theme_counter .b-share__handle {
+                    padding: 10px !important;
+                    text-align: center;
+                }
+            </style>
+
+            <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+            <script type="text/javascript">
+                // создаем блок c кнопакми поделмя
+
+
+                //ишим опися
+                var dis = "Интернет магазин интересных вещей";
+                var meta = document.getElementsByTagName('meta');
+                for (var i = 0; i < meta.length; i++) {
+                    var obj = meta[i];
+                    if (obj.name === "description") {
+                        dis = obj.content;
+                    }
+                }
+
+                var YaShareInstance = new Ya.share({
+                    element: 'ya_share1',
+                    onready: function (instance) {
+
+                    },
+                    l10n: "ru",
+                    elementStyle: {
+                        quickServices: ["vkontakte", "facebook", "twitter", "odnoklassniki", "moimir"]
+                    },
+                    theme: "counter",
+
+                    description: obj,
+                    image: '',
+
+
+                    link: "http://meded90.github.io/live-time/",
+                    onshare: function (name, block) {
+                        debugger
+                        ga('send', {
+                            'hitType': 'social',
+                            'socialNetwork': name,
+                            'socialAction': 'like',
+                            'socialTarget': 'http://meded90.github.io/live-time/',
+                            'page': 'http://meded90.github.io/live-time/'
+                        });
+                    }
+                });
+            </script>
+            <h4>
+                Раскажи друзям!!
+            </h4>
+
+            <div>
+                <span id="ya_share1"></span>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <a href="https://vk.com/baldink" onclick="ga('send', 'event', 'link', 'click', 'to vk page', 4); return true"
+       style="display: inline-block; vertical-align: middle; width: 300px;"
+       target="_blank">
+        <img style="float: left; margin-right: 10px; margin-left: 30px;" src="./img/avatar.jpg" alt=""/>
+        Автор приложения <br/>
+        добовлейтесь&nbsp;в&nbsp;друзя <br/>
+        Будет еше много интерсного
+
+    </a>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/twix/bin/twix.min.js"></script>
+<script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

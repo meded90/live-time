@@ -73,6 +73,7 @@ class LiveTime
 
   setStorage: ->
     localStorage.setItem( 'timelive', @dataBirthday.getTime() )
+    @dataYear  = @$dataYear.val()
     localStorage.setItem( 'timeYear', @dataYear )
 
   getCountWeek: ( date )->

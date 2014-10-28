@@ -96,6 +96,7 @@
 
     LiveTime.prototype.setStorage = function() {
       localStorage.setItem('timelive', this.dataBirthday.getTime());
+      this.dataYear = this.$dataYear.val();
       return localStorage.setItem('timeYear', this.dataYear);
     };
 
