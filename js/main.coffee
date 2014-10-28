@@ -42,17 +42,29 @@ class LiveTime
       @dataBirthday = @$datePiker.datepicker( 'getDate' )
       do  @setStorage
       do  @renderTable
+      if @$datePiker
+        @$datePiker.parents('.form-group').removeClass('has-error')
+      else
+        @$datePiker.parents('.form-group').addClass('has-error')
     )
     @$dataYear.on 'change', =>
       @dataBirthday = @$datePiker.datepicker( 'getDate' )
       do  @setStorage
       do  @renderTable
+      if @$datePiker
+        @$datePiker.parents('.form-group').removeClass('has-error')
+      else
+        @$datePiker.parents('.form-group').addClass('has-error')
 
   initDateYear: ->
     @$dataYear.on 'change', =>
       @dataYear = @$dataYear.val()
       do @setStorage
       do @renderTable
+      if @$dataYear
+        @$dataYear.parents('.form-group').removeClass('has-error')
+      else
+        @$dataYear.parents('.form-group').addClass('has-error')
 
   getStorage: ->
     time = +localStorage.getItem( 'timelive' )

@@ -52,14 +52,24 @@
         return function() {
           _this.dataBirthday = _this.$datePiker.datepicker('getDate');
           _this.setStorage();
-          return _this.renderTable();
+          _this.renderTable();
+          if (_this.$datePiker) {
+            return _this.$datePiker.parents('.form-group').removeClass('has-error');
+          } else {
+            return _this.$datePiker.parents('.form-group').addClass('has-error');
+          }
         };
       })(this));
       return this.$dataYear.on('change', (function(_this) {
         return function() {
           _this.dataBirthday = _this.$datePiker.datepicker('getDate');
           _this.setStorage();
-          return _this.renderTable();
+          _this.renderTable();
+          if (_this.$datePiker) {
+            return _this.$datePiker.parents('.form-group').removeClass('has-error');
+          } else {
+            return _this.$datePiker.parents('.form-group').addClass('has-error');
+          }
         };
       })(this));
     };
@@ -69,7 +79,12 @@
         return function() {
           _this.dataYear = _this.$dataYear.val();
           _this.setStorage();
-          return _this.renderTable();
+          _this.renderTable();
+          if (_this.$dataYear) {
+            return _this.$dataYear.parents('.form-group').removeClass('has-error');
+          } else {
+            return _this.$dataYear.parents('.form-group').addClass('has-error');
+          }
         };
       })(this));
     };
